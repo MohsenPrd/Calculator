@@ -1,5 +1,6 @@
 ## Mohsen Pourdehghan
 
+import datetime
 
 #-----Define functions-----
 def addition(x):
@@ -80,6 +81,8 @@ while more_number == True :
         more_number = False
 #----- 
 
+result = ''
+div_operand = 'null'
 #-----Select operator-----
 operator = input('which operator you want? (* _ / _ + _ -) ')
 
@@ -87,18 +90,22 @@ while operator != '*' and operator != '/' and operator != '+' and operator != '-
         operator = input('AGAIN!!! which operator you want? (* _ / _ + _ -) ')
 
 if operator == '*':
-        print(multiply(numbers_list))
+        result = multiply(numbers_list)
+        print(result)
 
 elif operator == '/':
         div_result, div_operand = division(numbers_list)
         if len(div_result) == 1:
+                result = div_result[0]
                 print(f'\nthe results for division of {numbers_list[0]} by {div_operand} : {div_result[0]}')
 
         elif len(div_result) == 0 :
+                result = 'Undefined (divide by zero)!'
                 print('Can not divide by zero!')
         else:
                 print('\n')
                 for index in range(len(div_result)):
+                        result += f'\nthe results for division of {numbers_list[index]} by {div_operand} : {div_result[index]}'
                         print(f'\nthe results for division of {numbers_list[index]} by {div_operand} : {div_result[index]}')
     
 elif operator == '+':
@@ -107,3 +114,25 @@ elif operator == '+':
 elif operator == '-':
         print(minus(numbers_list))
 #----- 
+
+
+# Save results to file
+file = open('Calculator/results.txt', 'a')
+
+file.write(f'''
+
+=== Results at {datetime.datetime.now()} ===
+
+numbers list: {numbers_list}
+
+operator: {operator}
+
+operand number: {div_operand if div_operand else 'null'}
+
+result: 
+
+{result}
+
+---------------------------------------
+
+           ''')
