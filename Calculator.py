@@ -127,7 +127,7 @@ numbers list: {numbers_list}
 
 operator: {operator}
 
-operand number: {div_operand if div_operand else 'null'}
+operand number: {div_operand}
 
 result: 
 
